@@ -18,7 +18,7 @@ for file in images:
         img = MIMEImage(fp.read())
     msg.attach(img)
 
-# def imagecount(n): #define function emailcount
+# def imagecount(n):
 #     if n > 0: 
 #         print "you have "+str(n)+" picture(s) of alpacas"
 #     else: 
