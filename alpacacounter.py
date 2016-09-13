@@ -2,6 +2,8 @@ import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 from email.mime.image import MIMEImage
+from cStringIO import StringIO
+from email.generator import Generator
 
 fromaddr = 'youreemail@gmail.com'
 toaddr = 'anotheremail@gmail.com'
@@ -10,29 +12,20 @@ msg['From'] = fromaddr
 msg['To'] = toaddr
 msg['Subject'] = 'Fun Facts About Alpacas'
 
-body = 'Have you ever wondered about the fascinating life of an alpaca ? They are truely extrordinary animals. The alpaca has fur that is waterproof and fire resistant. The alpaca also '
+body = 'Have you ever wondered about the fascinating life of an alpaca ? They are truely extrordinary animals. The alpaca has fur that is waterproof and fire resistant. The alpaca also has a variation of 22 different colors of fur.'
 msg.attach(MIMEText(body,'plain'))
 
-
-# We reference the image in the IMG SRC attribute by the ID we give it below
-# msgText = MIMEText('<b>Some <i>HTML</i> text</b> and an image.<br><img src="cid:image1"><br>Nifty!', 'html')
-# msgAlternative.attach(msgText)
-
-# This example assumes the image is in the current directory
-fp = open('alpaca.png', 'rb')
+fp = open('images/alpaca.png', 'rb')
 msgImage = MIMEImage(fp.read())
 fp.close()
 
-# Define the image's ID as referenced above
-msgImage.add_header('Content-ID', '<image1>')
-msgRoot.attach(msgImage)
 
 # for file in images:
-#     with open(file, 'alpaca') as fp:
-#         img = MIMEImage(fp.read())
-#     msg.attach(img)
+with open(file, 'alpaca') as fp:
+    img = MIMEImage(fp.read())
+msg.attach(img)
 
-# def imagecount(n): #define function emailcount
+# def imagecount(n):
 #     if n > 0: 
 #         print "you have "+str(n)+" picture(s) of alpacas"
 #     else: 
@@ -44,14 +37,25 @@ wordfreq = []
 for w in wordlist:
     wordfreq.append(wordlist.count(w))
 
-# print("String\n" + body +"\n")
-# print("List\n" + str(wordlist) + "\n")
 print("The word alpaca appears " + str(wordfreq) + " times in this email")
-# print("Pairs\n" + str(zip(wordlist, wordfreq)))
+
+# b = email.message_from_string(a)
+# if b.is_multipart():
+#     for part in b.walk():
+#         ctype = part.get_content_type()
+#         cdispo = str(part.get('Content-Disposition'))
+
+#         # skip any text/plain (txt) attachments
+#         if ctype == 'text/plain' and 'attachment' not in cdispo:
+#             body = part.get_payload(decode=True)  # decode
+#             break
+# # not multipart - i.e. plain text, no attachments, keeping fingers crossed
+# else:
+#     body = b.get_payload(decode=True)
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(fromaddr, '******')
+server.login(fromaddr, '*****')
 text = msg.as_string()
 server.sendmail(fromaddr, toaddr, text)
 server.quit()
