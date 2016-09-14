@@ -39,14 +39,16 @@ fp.close()
 msgImage.add_header('Content-ID', '<image1>')
 msgRoot.attach(msgImage)
 
-def imagecount(n):
-    if n > 0: 
-        print "you have "+str(n)+" picture(s) of alpacas"
-    else: 
-        print "you have no pictures of alpacas"
+# while True:
+# 	newimage = open('alpaca.png', 'rb')
+# 	def imagecount(n):
+# 	    if n > 0: 
+# 	        print "you have "+str(n)+" picture(s) of alpacas"
+# 	    else: 
+# 	        print "you have no pictures of alpacas"
 
-    imagecount(newimage)
-    time.sleep(5) 
+# 	    imagecount(newimage)
+# 	    time.sleep(5) 
 
 body = 'Have you ever wondered about the fascinating life of an alpaca ? They are truely extrordinary animals. The alpaca has fur that is waterproof and fire resistant. The alpaca also has a variation of 22 different colors of fur.'
 wordlist = body.split()
