@@ -20,9 +20,9 @@ msgImage = MIMEImage(fp.read())
 fp.close()
 
 
-# for file in images:
-with open(file, 'alpaca') as fp:
-    img = MIMEImage(fp.read())
+for file in images:
+	with open(file, 'alpaca') as fp:
+    	img = MIMEImage(fp.read())
 msg.attach(img)
 
 # def imagecount(n):
