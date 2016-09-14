@@ -45,7 +45,7 @@ def imagecount(n):
     else: 
         print "you have no pictures of alpacas"
 
-    imagecount(newimage) #call emailcount function and pass value newmails as agrument
+    imagecount(newimage)
     time.sleep(5) 
 
 # wordlist = msgRoot.split()
