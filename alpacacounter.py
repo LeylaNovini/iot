@@ -48,13 +48,14 @@ def imagecount(n):
     imagecount(newimage)
     time.sleep(5) 
 
-# wordlist = msgRoot.split()
+body = 'Have you ever wondered about the fascinating life of an alpaca ? They are truely extrordinary animals. The alpaca has fur that is waterproof and fire resistant. The alpaca also has a variation of 22 different colors of fur.'
+wordlist = body.split()
 
-# wordfreq = []
-# for w in wordlist:
-#     wordfreq.append(wordlist.count(w))
+wordfreq = []
+for w in wordlist:
+    wordfreq.append(wordlist.count(w))
 
-# print("The word alpaca appears " + str(wordfreq) + " times in this email")
+print("The word alpaca appears " + str(wordfreq) + " times in this email")
 
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
