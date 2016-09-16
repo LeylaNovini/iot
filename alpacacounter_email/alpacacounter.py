@@ -7,11 +7,11 @@ from email.generator import Generator
 import time
 
 
-# Define these once; use them twice!
-strFrom = 'you@email.com'
+# emails
+strFrom = 'your@email.com'
 strTo = 'another@email.com'
 
-# Create the root message and fill in the from, to, and subject headers
+# from, to, and subject headers
 msgRoot = MIMEMultipart('related')
 msgRoot['Subject'] = 'Fun Facts About Alpacas'
 msgRoot['From'] = strFrom
@@ -30,25 +30,35 @@ msgAlternative.attach(msgText)
 msgText = MIMEText('Have you ever wondered about the fascinating life of an alpaca ? They are truely extrordinary animals. The alpaca has fur that is waterproof and fire resistant. The alpaca also has a variation of 22 different colors of fur.', 'html')
 msgAlternative.attach(msgText)
 
-# This example assumes the image is in the current directory
+#open images
 fp = open('alpaca.png', 'rb')
+fp1 = open('3cuties.png', 'rb')
+fp2 = open ('alpacahair.png', 'rb')
+fp3 = open('group.png', 'rb')
+
+
 msgImage = MIMEImage(fp.read())
+msgImage1 = MIMEImage(fp1.read())
+msgImage2 = MIMEImage(fp2.read())
+msgImage3 = MIMEImage(fp3.read())
 fp.close()
+fp1.close()
+fp2.close()
+fp3.close()
 
 # Define the image's ID as referenced above
 msgImage.add_header('Content-ID', '<image1>')
 msgRoot.attach(msgImage)
 
-# while True:
-# 	newimage = open('alpaca.png', 'rb')
-# 	def imagecount(n):
-# 	    if n > 0: 
-# 	        print "you have "+str(n)+" picture(s) of alpacas"
-# 	    else: 
-# 	        print "you have no pictures of alpacas"
+msgImage1.add_header('Content-ID', '<image2>')
+msgRoot.attach(msgImage1)
 
-# 	    imagecount(newimage)
-# 	    time.sleep(5) 
+msgImage2.add_header('Content-ID', '<image3>')
+msgRoot.attach(msgImage2)
+
+msgImage3.add_header('Content-ID', '<image4>')
+msgRoot.attach(msgImage3)
+
 
 body = 'Have you ever wondered about the fascinating life of an alpaca ? They are truely extrordinary animals. The alpaca has fur that is waterproof and fire resistant. The alpaca also has a variation of 22 different colors of fur.'
 wordlist = body.split()
@@ -59,9 +69,16 @@ for w in wordlist:
 
 print("The word alpaca appears " + str(wordfreq) + " times in this email")
 
+newimage = [msgImage, msgImage1, msgImage2, msgImage3]
+
+finalimage = len(newimage)
+
+print "you have " +str(finalimage)+ " pictures of alpacas"
+
+
 server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
-server.login(strFrom, '******')
+server.login(strFrom, '*****')
 text = msgRoot.as_string()
 server.sendmail(strFrom, strTo, text)
 server.quit()
