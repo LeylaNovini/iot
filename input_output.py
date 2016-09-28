@@ -21,6 +21,17 @@ while True:
 
 	if input == True:
 		GPIO.output(11,GPIO.HIGH)
+
+		
+		status = 1
+
+	if input == False:
+		GPIO.output(11,GPIO.LOW)
+		status = 0
+	print status
+
+	input2 = GPIO.input(15)
+	if input2 == True:
 		fromaddr = "your@email.com"
 		toaddr = "another@email.com"
 		msg = MIMEMultipart()
@@ -36,16 +47,6 @@ while True:
 		server.login(fromaddr, "**********")
 		text = msg.as_string()
 		server.sendmail(fromaddr, toaddr, text)
-		
-		status = 1
-
-	if input == False:
-		GPIO.output(11,GPIO.LOW)
-		status = 0
-	print status
-
-	input2 = GPIO.input(15)
-	if input2 == True:
 		server.quit()
 
 
